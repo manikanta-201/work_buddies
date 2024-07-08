@@ -1,0 +1,26 @@
+
+nav{
+    background-color: white;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 300px;
+}
+
+nav .logo a h1{
+    color: black;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+nav .auth{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+nav .auth a{
+    color: black;
+}
