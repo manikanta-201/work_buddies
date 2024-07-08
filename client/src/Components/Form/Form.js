@@ -13,6 +13,8 @@ const Form = () => {
     updateForm,
     setUpdateForm,
   } = useContext(Data);
+
+
   // CREAT FORM FUNCTIONS
   const updateFormField = (e) => {
     const { name, value } = e.target;
@@ -21,10 +23,16 @@ const Form = () => {
       ...form,
       [name]: value,
     });
+
   };
 
   const createWorkout = async (e) => {
     e.preventDefault();
+    if(form.title === "" || form.reps === ""  || form.load === "" ){
+      alert("all fields are requied!")
+      return false;
+    }
+console.log("next line here ...");
     const response = await axios.post(
       "http://localhost:8000/api/workouts/create",
       form
@@ -77,8 +85,8 @@ const Form = () => {
               <input
                 type="text"
                 name="title"
-                value={updateForm.title}
-                onChange={handleUpdateFieldChange}
+                value={form.title}
+                onChange={updateFormField}
               />
             </div>
 
@@ -87,8 +95,8 @@ const Form = () => {
               <input
                 type="tel"
                 name="reps"
-                value={updateForm.reps}
-                onChange={handleUpdateFieldChange}
+                value={form.reps}
+                onChange={updateFormField}
               />
             </div>
 

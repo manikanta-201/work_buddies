@@ -25,7 +25,7 @@ const getWorkout = async (req, res) => {
 const creatWorkout = async (req, res) => {
   try {
     const newWorkout = new workout(req.body);
-    console.log(newWorkout)
+    // console.log(newWorkout)
     const workoutdata = await newWorkout.save();
     res.status(201).json(workoutdata);
   } catch (err) {
