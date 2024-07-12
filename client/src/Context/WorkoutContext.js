@@ -30,7 +30,7 @@ const WorkoutContext = ({ children }) => {
   // UPDATE REQUEST STATE
 
   const [updateForm, setUpdateForm] = useState({
-    _di: null,
+    _id: null,
     title: "",
     reps: "",
     load: "",

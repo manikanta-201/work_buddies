@@ -1,35 +1,38 @@
-.form{
-    width: 350px;
-    background-color: white;
-    padding: 40px 20px;
-    box-shadow: rgba(50, 50, 93, 0.25)0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3)0px 1px 3px -1px;
-}
 
-.form h1{
-    font-size: 30px;
-    margin-bottom: 30px;
-    color: var(--error);
-}
-
-.from form{
+.main-form{
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    gap:20px;
+    height: 80vh;
+   
+} 
+
+
+.main-form form{
+display: flex;
+justify-content: center;
+align-items: flex-start;
+flex-direction: column;
+background-color:white;
+width: 30%;
+padding: 40px;
+box-shadow: rgba(50, 50, 93, 0.25)0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3)0px 1px 3px -1px;
+    gap: 20px;
 
 }
-.form .field{
-   width: 100%; 
+
+.main-form  form .field{
+    width: 100%;
 }
 
-.form .lablel{
+
+.main-form .form .lablel{
     display: block;
     font-size: 17px;
 }
 
-.form input{
+.main-form form input{
     display: block;
     outline: none;
     border: 1px solid black;
@@ -38,7 +41,7 @@
     border-radius: 5px;
 }
 
-.form .button {
+.main-form .button {
     border: none;
     background-color: var(--error);
     color: white;
@@ -50,11 +53,13 @@
     transition: 0.2s;
 }
 
-.form .button:hover{
+.main-form form .button:hover{
     transform: scale(1.05);
 }
 
-.form button{
+
+
+.main-form button{
     margin-top: 10px;
     padding: 10px 30px;
     outline: none;
@@ -66,7 +71,8 @@
     text-transform: capitalize;
     
 }
-.form button:hover{
+.main-form button:hover{
 background: #082a8e;
 
 }
+

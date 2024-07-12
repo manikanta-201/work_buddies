@@ -14,7 +14,6 @@ const Form = () => {
     setUpdateForm,
   } = useContext(Data);
 
-
   // CREAT FORM FUNCTIONS
   const updateFormField = (e) => {
     const { name, value } = e.target;
@@ -23,16 +22,15 @@ const Form = () => {
       ...form,
       [name]: value,
     });
-
   };
 
   const createWorkout = async (e) => {
     e.preventDefault();
-    if(form.title === "" || form.reps === ""  || form.load === "" ){
-      alert("all fields are requied!")
+    if (form.title === "" || form.reps === "" || form.load === "") {
+      alert("all fields are requied!");
       return false;
     }
-console.log("next line here ...");
+    console.log("next line here ...");
     const response = await axios.post(
       "http://localhost:8000/api/workouts/create",
       form
