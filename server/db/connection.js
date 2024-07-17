@@ -6,5 +6,5 @@ mongoose.connect("mongodb://localhost:27017/project")
 console.log("Connecton is Estableshed")
 })
 .catch((err)=>{
-    console.log(`err is ${err}`)
+    console.log(`err is :${err}`)
 })

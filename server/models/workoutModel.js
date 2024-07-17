@@ -1,7 +1,7 @@
 const mongoose =require("mongoose");
 
 
-const workouSchema= mongoose.Schema({
+const workoutSchema= mongoose.Schema({
     title:{
      type:String,
      required:true
@@ -14,8 +14,11 @@ const workouSchema= mongoose.Schema({
         type:Number,
         required:true
        },
+       user_id:{
+        type:String,
+        require:true,
+       }
 },{timestamps: true});
-const workout = new mongoose.model("workout",workouSchema);
+const Workout =  mongoose.model("Workout",workoutSchema);
 
-
-module.exports=workout;
+module.exports=Workout;

@@ -1,7 +1,5 @@
 const express = require("express");
-
-// const workout = require("../models/workoutModel");
-
+const authUser =require("../middleware/userMiddleware")
 const router = express.Router();
 
 // require Controllers
@@ -13,8 +11,9 @@ const { getWorkouts,
      deleteWorkout,
  } = require("../controllers/workoutController");
 
-// get enter records
+ router.use(authUser)
 
+// get all records
 router.get("/", getWorkouts);
 
 // Get single recrdes
@@ -22,11 +21,11 @@ router.get("/:id", getWorkout);
 
 // Create recrde
 router.post("/create",creatWorkout);
-
 // update recrde
 
 router.patch("/:id",editWorkout);
 // dellete recourd
+
 router.delete("/:id",deleteWorkout);
 
 
