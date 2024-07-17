@@ -3,13 +3,13 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import WorkoutContext from "./Context/WorkoutContext";
-import { AuthContext } from "./Context/AuthContext";
-const state = "admin"
+import AuthContextProvider from "./Context/AuthContext";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <AuthContext.Provider value={{state}}>
+  <AuthContextProvider>
     <WorkoutContext>
-      <App />
+      <App/>
     </WorkoutContext>
-</AuthContext.Provider>
+  </AuthContextProvider>
 )

@@ -1,10 +1,11 @@
+import React from "react";
 import "./NavbarStyle.css";
 import { Link } from "react-router-dom";
 import { useLogout } from "../../Hooks/useLogout";
 import { useAuthContext } from "../../Hooks/useAuthContext";
 
 const Navbar = () => {
-const {user}=useAuthContext();
+  const { user } = useAuthContext();
 
   const { logout } = useLogout();
   const handleClick = () => {
@@ -13,20 +14,19 @@ const {user}=useAuthContext();
   return (
     <nav>
       <Link to="/">WorkoutBuddy</Link>
-{user &&(
-  
-  <div className="logout">
-      <span>{user.email}</span>
-        <button onClick={handleClick}>Logout</button>
-      </div>
-)};
-
-     {!user && (
-      <div className="auth">
-        <Link to="/signup">Sign Up</Link>
-        <Link to="/login">Login</Link>
-      </div>
-     )}
+      {user && (
+        <div className="logout">
+          <span>{user.email}</span>
+          <button onClick={handleClick}>Logout</button>
+        </div>
+      )}
+      ;
+      {!user && (
+        <div className="auth">
+          <Link to="/signup">Sign Up</Link>
+          <Link to="/login">Login</Link>
+        </div>
+      )}
     </nav>
   );
 };

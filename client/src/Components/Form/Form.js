@@ -1,7 +1,9 @@
+import React, { useState } from "react";
 import { useContext } from "react";
-import "./FormStyles.css";
 import axios from "axios";
 import { Data } from "../../Context/WorkoutContext";
+import "./FormStyles.css";
+import { useAuthContext } from "../../Hooks/useAuthContext";
 
 const Form = () => {
   const {
@@ -14,7 +16,10 @@ const Form = () => {
     setUpdateForm,
   } = useContext(Data);
 
+  const { user } = useAuthContext();
+
   // CREAT FORM FUNCTIONS
+
   const updateFormField = (e) => {
     const { name, value } = e.target;
 
@@ -33,9 +38,17 @@ const Form = () => {
     console.log("next line here ...");
     const response = await axios.post(
       "http://localhost:8000/api/workouts/create",
-      form
+      form,
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
     );
+
+
     setWorkouts([...workouts, response.data]);
+
     setForm({
       title: "",
       reps: "",
@@ -45,6 +58,7 @@ const Form = () => {
   };
 
   // UPDATE FORM FUNCTIONS
+
   const handleUpdateFieldChange = (e) => {
     const { name, value } = e.target;
     setUpdateForm({
@@ -53,15 +67,24 @@ const Form = () => {
     });
   };
 
+  // delete requrest
+
   const updateWorkout = async (e) => {
     e.preventDefault();
 
     const { _id, title, reps, load } = updateForm;
-    await axios.patch(`http://localhost:8000/api/workouts/${_id}`, {
-      title,
-      reps,
-      load,
-    });
+    await axios.patch(
+      `http://localhost:8000/api/workouts/${_id}`,
+      {   title,  reps,   load, },
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+
+    console.log(`from form.js , user id is ${user._id}`);
+
     getWorkouts();
     setUpdateForm({
       _di: null,
@@ -77,6 +100,7 @@ const Form = () => {
       {!updateForm._id && (
         <div className="form">
           <h1>CREATE RECORD</h1>
+
           <form onSubmit={createWorkout}>
             <div className="field">
               <label htmlFor=""> Title :</label>
@@ -84,6 +108,7 @@ const Form = () => {
                 type="text"
                 name="title"
                 value={form.title}
+                id=""
                 onChange={updateFormField}
               />
             </div>
@@ -94,6 +119,7 @@ const Form = () => {
                 type="tel"
                 name="reps"
                 value={form.reps}
+                id=""
                 onChange={updateFormField}
               />
             </div>
@@ -104,6 +130,7 @@ const Form = () => {
                 type="number"
                 name="load"
                 value={form.load}
+                id=""
                 onChange={updateFormField}
               />
             </div>
@@ -116,6 +143,7 @@ const Form = () => {
       {updateForm._id && (
         <div className="form">
           <h1>EDIT RECORD</h1>
+
           <form onSubmit={updateWorkout}>
             <div className="field">
               <label htmlFor=""> Title :</label>
@@ -123,6 +151,7 @@ const Form = () => {
                 type="text"
                 name="title"
                 value={updateForm.title}
+                id=""
                 onChange={handleUpdateFieldChange}
               />
             </div>
@@ -133,6 +162,7 @@ const Form = () => {
                 type="tel"
                 name="reps"
                 value={updateForm.reps}
+                id=""
                 onChange={handleUpdateFieldChange}
               />
             </div>
@@ -143,6 +173,7 @@ const Form = () => {
                 type="tel"
                 name="load"
                 value={updateForm.load}
+                id=""
                 onChange={handleUpdateFieldChange}
               />
             </div>

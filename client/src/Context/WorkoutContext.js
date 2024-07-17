@@ -1,15 +1,25 @@
+import React from "react";
 import { createContext, useState } from "react";
 import axios from "axios";
+import {useAuthContext} from "../Hooks/useAuthContext"
 
 export const Data = createContext();
 
 const WorkoutContext = ({ children }) => {
+  const {user} =useAuthContext()
+
   // GET REQUEST STATE
   const [workouts, setWorkouts] = useState(null);
+  
   // GET REQUEST FUNCTION
   const getWorkouts = async () => {
-    const response = await axios.get("http://localhost:8000/api/workouts");
+    const response = await axios.get(`http://localhost:8000/api/workouts`,{
+      headers:{
+        "Authorization" : `Bearer ${user.token}`
+      }
+    });
     const data = response.data;
+    console.log(data);
     setWorkouts(data);
   };
 
@@ -23,7 +33,13 @@ const WorkoutContext = ({ children }) => {
   // DELETE REQUEST FUNCTION
 
   const deleteWorkout = async (_id) => {
-    await axios.delete(`http://localhost:8000/api/workouts/${_id}`);
+    await axios.delete(`http://localhost:8000/api/workouts/${_id}`,
+      {
+        headers:{
+          "Authorization" : `Bearer ${user.token}`
+        }
+      }
+    );
     getWorkouts();
   };
 

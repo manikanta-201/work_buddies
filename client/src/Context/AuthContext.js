@@ -1,6 +1,4 @@
-
-
-import { createContext, useReducer,  useEffect} from "react";
+import { createContext, useReducer, useEffect } from "react";
 
 export const AuthContext = createContext();
 
@@ -10,69 +8,31 @@ export const authReducer = (state, action) => {
       return { user: action.payload };
     case "LOGOUT":
       return { user: null };
-      default:
-        return state
- 
-                      
+    default:
+      return state;
   }
 };
 
-const AuthContextProvider = ({children}) => {
+const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
     user: null,
   });
 
-  useEffect(()=>{
-    const user=JSON.parse(localStorage.getItem("user"))
-    if(user){
-     dispatch({type:"LOGIN",payload:user})
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      dispatch({ type: "LOGIN", payload: user });
     }
-  },[])
+  }, []);
 
-  // console.log("AuthContext State:", state);
-  return(
-    <AuthContext.Provider value={{...state,dispatch}}>
-{children}
+  
+  return (
+    <AuthContext.Provider value={{ ...state, dispatch }}>
+      {children}
     </AuthContext.Provider>
-  )
+  );
 };
 
 export default AuthContextProvider;
 
 
-// import { createContext, useReducer, useEffect } from "react";
-
-// // Create context
-// export const AuthContext = createContext();
-
-// // Define reducer
-// export const authReducer = (state, action) => {
-//   switch (action.type) {
-//     case "LOGIN":
-//       return { user: action.payload };
-//     case "LOGOUT":
-//       return { user: null };
-//     default:
-//       return state;
-//   }
-// };
-
-// // Define provider component
-// const AuthContextProvider = ({ children }) => {
-//   const [state, dispatch] = useReducer(authReducer, { user: null });
-
-//   useEffect(() => {
-//     const user = JSON.parse(localStorage.getItem("user"));
-//     if (user) {
-//       dispatch({ type: "LOGIN", payload: user });
-//     }
-//   }, []);
-
-//   return (
-//     <AuthContext.Provider value={{ ...state, dispatch }}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// };
-
-// export default AuthContextProvider;
